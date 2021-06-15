@@ -3,6 +3,7 @@
 
 name: Node.js CI
 
+# tells the pipeline when to check the code
 on:
   push:
     branches: [ main ]
@@ -10,13 +11,14 @@ on:
     branches: [ main ]
 
 jobs:
+  # creates a server
   build:
-
+    # specifies the server type running the pipeline
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
+        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
