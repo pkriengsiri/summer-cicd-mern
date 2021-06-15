@@ -3,7 +3,10 @@
 
 name: Node.js CI
 
+<<<<<<< HEAD
 # tells the pipeline when to check the code
+=======
+>>>>>>> 856bcdf7ad794472d278899e9814fab61bf9582c
 on:
   push:
     branches: [ main ]
