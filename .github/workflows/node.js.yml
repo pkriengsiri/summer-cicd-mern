@@ -3,7 +3,6 @@
 
 name: Main Workflow
 
-# tells the pipeline when to check the code
 on:
   push:
     branches: [ main ]
@@ -11,9 +10,8 @@ on:
     branches: [ main ]
 
 jobs:
-  # creates a server
   build:
-    # specifies the server type running the pipeline
+
     runs-on: ubuntu-latest
 
     strategy:
