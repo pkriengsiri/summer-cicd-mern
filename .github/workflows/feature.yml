@@ -24,4 +24,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: echo "This is a feature branch!"
+    - run: npm ci
     - run: npm run lint
