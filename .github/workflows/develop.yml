@@ -1,8 +1,9 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Main Workflow
+name: Develop workflow
 
+# tells the pipeline when to check the code
 on:
   push:
     branches: [ main ]
@@ -10,8 +11,9 @@ on:
     branches: [ main ]
 
 jobs:
+  # creates a server
   build:
-
+    # specifies the server type running the pipeline
     runs-on: ubuntu-latest
 
     strategy:
@@ -25,6 +27,4 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: echo "This is the develop branch!"
