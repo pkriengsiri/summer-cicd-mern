@@ -6,9 +6,9 @@ name: Develop workflow
 # tells the pipeline when to check the code
 on:
   push:
-    branches: [ main ]
+    branches: [ develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ develop ]
 
 jobs:
   # creates a server
@@ -28,3 +28,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: echo "This is the develop branch!"
+    - run: npm ci
+    - run: npm run lint
+    - run: npm run test:mocha
