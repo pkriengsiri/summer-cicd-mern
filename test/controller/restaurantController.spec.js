@@ -40,14 +40,11 @@ describe("restaurantController", () => {
     //it block
     it("should return a model if found", async () => {
       // Arrange
-
-      // create a mock
       mongoose.Model.findById = sandbox
         .stub()
         .returns(Promise.resolve("resolved"));
 
       // Act
-
       await restaurantController.findById(req, res);
 
       // Assert
@@ -57,16 +54,13 @@ describe("restaurantController", () => {
 
     it("should return an error if an error occurs", async () => {
       // Arrange
-
       mongoose.Model.findById = sandbox.stub().returns(Promise.reject("error"));
 
       // Act
-
       await restaurantController.findById(req, res);
       await console.log("---");
 
       // Assert
-
       expect(res.status).to.have.been.calledWith(422);
       expect(statusJsonSpy).to.have.been.calledWith("error");
     });
