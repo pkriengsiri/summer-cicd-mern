@@ -17,21 +17,29 @@ describe("", () => {
 //describe
 describe("restaurantController", () => {
   describe("findById", () => {
+    afterEach(function () {
+      sinon.restore();
+      sandbox.restore();
+    });
+
+    const req = {
+      params: {
+        id: 1,
+      },
+    };
+
+    const statusJsonSpy = sinon.spy();
+
+    const res = {
+      json: sinon.spy(),
+      status: sinon.stub().returns({ json: statusJsonSpy }),
+    };
+
+    const sandbox = sinon.createSandbox();
+
     //it block
     it("should return a model if found", async () => {
       // Arrange
-
-      const sandbox = sinon.createSandbox();
-
-      const req = {
-        params: {
-          id: 1,
-        },
-      };
-
-      const res = {
-        json: sinon.spy(),
-      };
 
       // create a mock
       mongoose.Model.findById = sandbox
@@ -47,35 +55,20 @@ describe("restaurantController", () => {
       expect(res.json).to.have.been.calledWith("resolved");
     });
 
-    it("should return an error if an error occurs", async() => {
+    it("should return an error if an error occurs", async () => {
       // Arrange
-      const sandbox = sinon.createSandbox();
-      const statusJsonSpy = sinon.spy();
-
-      const req = {
-        params: {
-          id: 1,
-        },
-      };
-
-      const res = {
-        json: sinon.spy(),
-        status: sinon.stub().returns({json: statusJsonSpy}),
-      };
 
       mongoose.Model.findById = sandbox.stub().returns(Promise.reject("error"));
 
       // Act
 
-      await restaurantController.findById(req,res);
+      await restaurantController.findById(req, res);
       await console.log("---");
 
       // Assert
 
       expect(res.status).to.have.been.calledWith(422);
       expect(statusJsonSpy).to.have.been.calledWith("error");
-      
-
     });
   });
 });
